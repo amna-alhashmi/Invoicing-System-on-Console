@@ -24,10 +24,11 @@ public static void BigMenu() throws InstantiationException, IllegalAccessExcepti
 		case 1:
 			while (SubMenu) {
 				System.out.println("0.Create Shope");
-				System.out.println("1.Load Data (Items and invoices)");
-				System.out.println("2.Set Shop Name");
-				System.out.println("3.Set Invoice Header (Tel / Fax / Email / Website)");
-				System.out.println("4.Go Back");
+				System.out.println("1.Create Invoice Header");
+				System.out.println("2.Load Data (Items and invoices)");
+				System.out.println("3.Set Shop Name");
+				System.out.println("4.Set Invoice Header (Tel / Fax / Email / Website)");
+				System.out.println("5.Go Back");
 				
 				String SubMenu1 = sa.next();
 				int SubMenu2 = Integer.parseInt(SubMenu1);
@@ -38,40 +39,53 @@ public static void BigMenu() throws InstantiationException, IllegalAccessExcepti
 					break;
 					
 				case 1:
-					Items items=new Items();
-					items.insertIntoItems();
+					Shope shope1=new Shope();
+					shope1.createTableInvoiceHeader();
 					
 					
 					break;
 					
 				case 2:
-					
-					Shope shope1=new Shope();
-					shope1.insertIntoShope();
+					System.out.println("can you Pls choose what you want:");
+					System.out.println("1.Items");
+					System.out.println("2.Invoice");
+					int choose = sa.nextInt();
+					if(choose==1) {
+					Items items=new Items();
+					items.insertIntoItems();
+					}else {
+						Invoice invoice1=new Invoice();
+						invoice1.insertIntoItems();
+					}
 					
 					break;
 					
 				case 3:
-//					invoiceHeader InvoiceHeader=new invoiceHeader();
-//					InvoiceHeader.createTableInvoiceHeader();
+					Shope shope2=new Shope();
+					shope2.insertIntoShope();
 					
-					invoiceHeader InvoiceHeader1=new invoiceHeader();
-					InvoiceHeader1.insertIntoInvoiceHeader();
+					
+					
 					
 					break;
 					
 				case 4:
-					SubMenu=false;
-					BigMenu=true;
+					Shope shope3=new Shope();
+					shope3.insertIntoInvoiceHeader();
+					
 					
 					
 					break;
+				case 5:
+					SubMenu=false;
+					BigMenu=true;
+					break;
 		
-				
 				}
 				}SubMenu=false;
 	
 	break;
+	
 		case 2:
 			while (SmallMenu) {
 				System.out.println("0.Create Items");
@@ -89,13 +103,18 @@ public static void BigMenu() throws InstantiationException, IllegalAccessExcepti
 					items.createTableItems();
 					break;
 				case 1:
-					
+					Items items1=new Items();
+					items1.insertIntoItems();
 					break;
 					
 				case 2:
+					Items items2=new Items();
+					items2.deleteByItems();
 					break;
 					
 				case 3:
+					Items items3=new Items();
+					items3.updateByItems();
 					break;
 					
 				case 4:
