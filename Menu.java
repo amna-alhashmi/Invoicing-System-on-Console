@@ -52,7 +52,11 @@ public static void BigMenu() throws InstantiationException, IllegalAccessExcepti
 					break;
 					
 				case 3:
+//					invoiceHeader InvoiceHeader=new invoiceHeader();
+//					InvoiceHeader.createTableInvoiceHeader();
 					
+					invoiceHeader InvoiceHeader1=new invoiceHeader();
+					InvoiceHeader1.insertIntoInvoiceHeader();
 					
 					break;
 					

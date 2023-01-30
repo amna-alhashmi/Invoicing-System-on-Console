@@ -9,11 +9,11 @@ import java.util.Scanner;
 
 public class Items {
 	private static String ShopeName;
-	private static String itemId;
-	private static String itemName;
-	private String unitPrice;
-	private Integer quantity;
-	private Integer qtyAmount;
+	 String itemId;
+	 String itemName;
+	 String unitPrice;
+	 Integer quantity;
+	 Integer qtyAmount;
 
 	public String getItemId() {
 		return itemId;
@@ -103,11 +103,12 @@ public static void insertIntoItems() throws SQLException, InstantiationException
 			System.out.println("PLS Enter qtyAmount");
 			int qtyAmount = sa.nextInt();
 			
-			System.out.println("PLS Enter shope id you want");
-			int id = sa.nextInt();
+			System.out.println("PLS Enter shope name you want");
+			String name = sa.next();
 			
-			String sql = "select id  from ShopeTable where ShopeName = ?";
+			String sql = "select id  from ShopeTable where ShopeName ='" + name + "'";
 			Connection con = null;
+			
 			String url = "jdbc:mysql://localhost:3306/Text_SQL";
 			String user = "root";
 			String pass = "root";
@@ -119,7 +120,7 @@ public static void insertIntoItems() throws SQLException, InstantiationException
 				con = DriverManager.getConnection(url, user, pass);
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				
-				pstmt.setString(1, ShopeName);
+				//pstmt.setString(1, ShopeName);
 				try {
 					int shope_id = 0;
 					ResultSet rs = pstmt.executeQuery();
@@ -128,16 +129,16 @@ public static void insertIntoItems() throws SQLException, InstantiationException
 						shope_id = rs.getInt("id");
 					}
 				
-			sql = "INSERT INTO ShopeTable(item_Id,item_Name,unitPrice,quantity,qtyAmount)values (?,?,?,?,?)";
+			sql = "INSERT INTO itemsTable(itemId,itemName,unitPrice,quantity,qtyAmount,Shope_id)VALUES(?,?,?,?,?,?)";
 			try {
 				PreparedStatement pstmt3 = con.prepareStatement(sql);
 				
-				pstmt3.setString(1,itemId);
-				pstmt3.setString(2,itemName);
+				pstmt3.setString(1,item_Id);
+				pstmt3.setString(2,item_Name);
 				pstmt3.setString(3,unitPrice);
 				pstmt3.setInt(4, quantity);
 				pstmt3.setInt(5, qtyAmount);
-				
+				pstmt3.setInt(6, shope_id);
 				pstmt3.executeUpdate();
 				System.out.println("added successfully");
 				
