@@ -5,23 +5,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Items {
 	
-	String itemId;
+	
 	String itemName;
 	String unitPrice;
 	Integer quantity;
 	Integer qtyAmount;
 	Integer Price;
-	public String getItemId() {
-		return itemId;
-	}
-
-	public void setItemId(String itemId) {
-		this.itemId = itemId;
-	}
+	
 
 	public String getItemName() {
 		return itemName;
@@ -60,7 +55,7 @@ public class Items {
 		String user = "root";
 		String pass = "root";
 
-		String sqlDB = "CREATE TABLE itemsTable " + "(id INTEGER NOT NULL AUTO_INCREMENT, " + "itemId VARCHAR(20),"
+		String sqlDB = "CREATE TABLE itemsTable " + "(id INTEGER NOT NULL AUTO_INCREMENT, "
 				+ "itemName VARCHAR(20)," + "unitPrice VARCHAR(20)," + "quantity INTEGER NOT NULL ,"
 				+ "qtyAmount INTEGER NOT NULL ," +"Price INTEGER NOT NULL,"+ "Shope_id INTEGER  ,"
 				+ "FOREIGN KEY (Shope_id) REFERENCES ShopeTable(id) ON DELETE CASCADE ," + " PRIMARY KEY ( id ))";
@@ -97,8 +92,8 @@ public class Items {
 		System.out.println("PLS Enter password");
 		String pass = sa.next();
 
-		System.out.println("PLS Enter item Id");
-		String item_Id = sa.next();
+//		System.out.println("PLS Enter item Id");
+//		String item_Id = sa.next();
 
 		System.out.println("PLS Enter item Name");
 		String item_Name = sa.next();
@@ -139,17 +134,17 @@ public class Items {
 					shope_id = rs.getInt("id");
 				}
 
-				sql = "INSERT INTO itemsTable(itemId,itemName,unitPrice,quantity,qtyAmount,Price,Shope_id)VALUES(?,?,?,?,?,?,?)";
+				sql = "INSERT INTO itemsTable(itemName,unitPrice,quantity,qtyAmount,Price,Shope_id)VALUES(?,?,?,?,?,?)";
 				try {
 					PreparedStatement pstmt3 = con.prepareStatement(sql);
 
-					pstmt3.setString(1, item_Id);
-					pstmt3.setString(2, item_Name);
-					pstmt3.setString(3, unitPrice);
-					pstmt3.setInt(4, quantity);
-					pstmt3.setInt(5, qtyAmount);
-					pstmt3.setInt(6, Price);
-					pstmt3.setInt(7, shope_id);
+					
+					pstmt3.setString(1, item_Name);
+					pstmt3.setString(2, unitPrice);
+					pstmt3.setInt(3, quantity);
+					pstmt3.setInt(4, qtyAmount);
+					pstmt3.setInt(5, Price);
+					pstmt3.setInt(6, shope_id);
 					pstmt3.executeUpdate();
 					System.out.println("added successfully");
 
@@ -245,7 +240,43 @@ public class Items {
 
 	}	
 	
-	
+	public static void readFromItemsTable() {
+		String url = "jdbc:mysql://localhost:3306/text_sql";
+		String username = "root";
+		String password = "root";
+
+		String sql = "SELECT * FROM itemsTable";
+		// Connection, Driver, DriverRegister lines will be exactly same
+
+		java.sql.Connection conn = null;
+		try {
+			Driver driver = (Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+			DriverManager.registerDriver(driver);
+			conn = DriverManager.getConnection(url, username, password);
+			java.sql.Statement st = conn.createStatement();
+			ResultSet resultSet = st.executeQuery(sql);
+			if(resultSet.next()) {
+			 do {
+				System.out.println("################################" );
+				System.out.println("Item ID:"+resultSet.getString("itemId") );
+				System.out.println("Item Name:"+resultSet.getString("itemName") );
+				System.out.println("unit Price:"+resultSet.getString("unitPrice") );
+				System.out.println("quantity:"+resultSet.getString("quantity") );
+				System.out.println("qty Amount:"+resultSet.getString("qtyAmount") );
+				System.out.println("Price:"+resultSet.getString("Price") );
+				System.out.println("################################" );
+
+			
+			 }while (resultSet.next());
+			
+			 
+			}
+			conn.close();
+		} catch (Exception ex) {
+			System.err.println(ex);
+		}
+
+	}
 	
 	
 	

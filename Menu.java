@@ -118,6 +118,8 @@ public static void BigMenu() throws InstantiationException, IllegalAccessExcepti
 					break;
 					
 				case 4:
+					Items items4=new Items();
+					items4.readFromItemsTable();
 					break;
 					
 				case 5:
@@ -126,8 +128,6 @@ public static void BigMenu() throws InstantiationException, IllegalAccessExcepti
 					BigMenu=true;
 					
 					break;
-				
-				
 				
 				}
 			
@@ -145,28 +145,20 @@ public static void BigMenu() throws InstantiationException, IllegalAccessExcepti
 			break;
 			
 		case 4:
-			
-			
-			
-			
-			
-			
-			
+			Invoice invoice1=new Invoice();
+			invoice1.readFromInvoiceTable();
+		
 			break;
 			
 		case 5:
-			
-			
-			
-			
-			
-			
-			
-			
+			Invoice invoice2=new Invoice();
+			invoice2.readFromReportInvoiceTable();
+	
 			break;
 			
 		case 6:
-			
+			Invoice invoice3=new Invoice();
+			invoice3.getIdInvoice();
 			
 			
 			
