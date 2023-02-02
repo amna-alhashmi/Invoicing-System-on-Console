@@ -11,18 +11,20 @@ public class MainSqlText {
 		boolean SubMenu = true;
 		boolean SmallMenu = true;
 		while (BigMenu) {
-		for(String x:Menu.ShowMenu()) {
-			System.out.println(x);
-		}
+			Menu.ShowMenu(1);
+//		for(String x:Menu.ShowMenu()) {
+//			System.out.println(x);
+//		}
 		
 			String BigMenu1 = sa.next();
 			int BigMenu2 = Integer.parseInt(BigMenu1);
 			switch (BigMenu2) {
 			case 1:
 				while (SubMenu) {
-					for(String x:Menu.ShowSubMenu()) {
-						System.out.println(x);
-					}
+					Menu.ShowMenu(2);
+//					for(String x:Menu.ShowSubMenu()) {
+//						System.out.println(x);
+//					}
 
 					
 					String SubMenu1 = sa.next();
@@ -84,10 +86,11 @@ public class MainSqlText {
 		
 			case 2:
 				while (SmallMenu) {
+					Menu.ShowMenu(3);
 					
-					for(String x:Menu.ShowSubMenu1()) {
-						System.out.println(x);
-					}
+//					for(String x:Menu.ShowSubMenu1()) {
+//						System.out.println(x);
+//					}
 
 					
 					String SmallMenu1 = sa.next();
