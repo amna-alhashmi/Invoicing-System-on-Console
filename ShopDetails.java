@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ShopDetails {
@@ -44,14 +45,15 @@ public class ShopDetails {
 //			Scanner sa = new Scanner(System.in);
 //			System.out.println("PLS Enter shope name");
 //			int user_input = sa.nextInt();
+			
 			String shope_name=" ";
 			try {
 				
 				Scanner sa = new Scanner(System.in);
 				System.out.println("PLS Enter shope name");
 				shope_name = sa.next();
-			}catch (Exception ex) {
-				System.err.println(ex);
+			}catch (InputMismatchException e) {
+				System.err.println(e);
 			}
 			
 				String sql = "INSERT INTO ShopeTable(ShopeName)"+ "values('"+shope_name+"')";
@@ -107,33 +109,77 @@ public class ShopDetails {
 	}
 	
 	public static void insertIntoInvoiceHeader() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
-		
+		String url = " ";
 			Scanner sa = new Scanner(System.in);
-			System.out.println("PLS Enter Database URL");
-			String url = sa.next();
+			try {
+				System.out.println("PLS Enter Database URL");
+				 url = sa.next();
+			}catch (InputMismatchException e) {
+				System.err.println(e);
+			}
 			
-			System.out.println("PLS Enter userName");
-			String user = sa.next();
+			String user=" ";
+			try {
+				System.out.println("PLS Enter userName");
+				user = sa.next();
+			}catch (InputMismatchException e) {
+				System.err.println(e);
+			}
 			
-			System.out.println("PLS Enter password");
-			String pass = sa.next();
+			String pass=" ";
+			try {
+				System.out.println("PLS Enter password");
+				pass = sa.next();
+			}catch (InputMismatchException e) {
+				System.err.println(e);
+			}
 			
 			
-			System.out.println("PLS Enter tel number");
-			int tel = sa.nextInt();
-			
-			System.out.println("PLS Enter fax");
-			String fax = sa.next();
-			
-			System.out.println("PLS Enter Email");
-			String Email = sa.next();
-			
-			System.out.println("PLS Enter Website");
-			String Website = sa.next();
-			
+			int tel=0;
+			try {
+				System.out.println("PLS Enter tel number");
+				tel = sa.nextInt();
+			}catch (InputMismatchException e) {
+				System.err.println(e);
+				System.err.println("wrong input Pls try again");
 				
+			}
+			
+			String fax="";
+			try {
+			System.out.println("PLS Enter fax");
+			fax = sa.next();
+			}catch (InputMismatchException e) {
+				System.err.println(e);
+			}
+			
+			String Email="";
+			try {
+				System.out.println("PLS Enter Email");
+				Email = sa.next();
+			}catch (InputMismatchException e) {
+				System.err.println(e);
+			}
+			
+			String Website="";
+			try {
+				System.out.println("PLS Enter Website");
+				Website = sa.next();
+				
+			}catch (InputMismatchException e) {
+				System.err.println(e);
+			}
+			
+			
+			String shope_name=" ";
+			try {
 				System.out.println("PLS Enter shope name");
-				String shope_name = sa.next();
+				shope_name = sa.next();
+				
+			}catch (InputMismatchException e) {
+				System.err.println(e);
+			}
+				
 				
 	
 		String sql = "select id  from ShopeTable where ShopeName ='" + shope_name + "'";

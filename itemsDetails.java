@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class itemsDetails {
@@ -40,36 +41,80 @@ public class itemsDetails {
 
 	public static void insertIntoItems()
 			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+		String url = " ";
 		Scanner sa = new Scanner(System.in);
-		System.out.println("PLS Enter Database URL");
-		String url = sa.next();
+		try {
+			System.out.println("PLS Enter Database URL");
+			 url = sa.next();
+		}catch (InputMismatchException e) {
+			System.err.println(e);
+		}
 
-		System.out.println("PLS Enter userName");
-		String user = sa.next();
+		String user=" ";
+		try {
+			System.out.println("PLS Enter userName");
+			user = sa.next();
+		}catch (InputMismatchException e) {
+			System.err.println(e);
+		}
+		
+		String pass=" ";
+		try {
+			System.out.println("PLS Enter password");
+			pass = sa.next();
+		}catch (InputMismatchException e) {
+			System.err.println(e);
+		}
 
-		System.out.println("PLS Enter password");
-		String pass = sa.next();
 
 //		System.out.println("PLS Enter item Id");
 //		String item_Id = sa.next();
+String item_Name="";
+try {
+	System.out.println("PLS Enter item Name");
+	item_Name = sa.next();	
+}catch (InputMismatchException e) {
+	System.err.println(e);
+}
+	
+String unitPrice="";
+try {
+	System.out.println("PLS Enter unit Price");
+	unitPrice = sa.next();
+}catch (InputMismatchException e) {
+	System.err.println(e);
+}
+int quantity=0;	
+try {
+	System.out.println("PLS Enter quantity");
+	quantity = sa.nextInt();
+}catch (InputMismatchException e) {
+	System.err.println(e);
+}
 
-		System.out.println("PLS Enter item Name");
-		String item_Name = sa.next();
+int qtyAmount=0;	
+try {
+	System.out.println("PLS Enter qtyAmount");
+	qtyAmount = sa.nextInt();
+}catch (InputMismatchException e) {
+	System.err.println(e);
+}
+int Price=0;
+		try {
+			System.out.println("PLS Enter Price");
+			Price = sa.nextInt();
+		}catch (InputMismatchException e) {
+			System.err.println(e);
+		}
+		String name="";	
+try {
+	System.out.println("PLS Enter shope name you want");
+	name = sa.next();
 
-		System.out.println("PLS Enter unit Price");
-		String unitPrice = sa.next();
-
-		System.out.println("PLS Enter quantity");
-		int quantity = sa.nextInt();
-
-		System.out.println("PLS Enter qtyAmount");
-		int qtyAmount = sa.nextInt();
-		
-		System.out.println("PLS Enter Price");
-		int Price = sa.nextInt();
-
-		System.out.println("PLS Enter shope name you want");
-		String name = sa.next();
+}catch (InputMismatchException e) {
+	System.err.println(e);
+}
+	
 
 		String sql = "select InvoiceHeaderTable.id from InvoiceHeaderTable inner join ShopeTable on ShopeTable.id = InvoiceHeaderTable.Shope_id_Details where ShopeTable.ShopeName='" + name + "'";
 		Connection con = null;
@@ -176,12 +221,24 @@ public class itemsDetails {
 			DriverManager.registerDriver(driver);
 			con = DriverManager.getConnection(url, username, password);
 			Statement st = con.createStatement();
-
+			int user_input=0;
 			Scanner sa = new Scanner(System.in);
-			System.out.println("PLS Enter the id you want to Update  :");
-			int user_input = sa.nextInt();
-			System.out.println("Please Enter the new Item Price");
-			int new_Item_Price = sa.nextInt();
+try {
+	
+	System.out.println("PLS Enter the id you want to Update  :");
+	user_input = sa.nextInt();
+}catch (InputMismatchException e) {
+	System.err.println(e);
+}
+int new_Item_Price=0;
+			try {
+				
+				System.out.println("Please Enter the new Item Price");
+				new_Item_Price = sa.nextInt();	
+			}catch (InputMismatchException e) {
+				System.err.println(e);
+			}
+			
 			
 			String sql = "UPDATE itemsTable SET Price=" + new_Item_Price +" WHERE id="
 					+ user_input + "";

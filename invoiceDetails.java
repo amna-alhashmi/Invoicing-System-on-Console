@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class invoiceDetails {
@@ -45,32 +46,78 @@ public class invoiceDetails {
 	public static void insertIntoItems()
 			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 		Scanner sa = new Scanner(System.in);
-		System.out.println("PLS Enter Database URL");
-		String url = sa.next();
-
+		String url="";
+		try {
+			System.out.println("PLS Enter Database URL");
+			url = sa.next();
+			
+		}catch (InputMismatchException e) {
+			System.err.println(e);
+		}
+		String user="";
+	try {
 		System.out.println("PLS Enter userName");
-		String user = sa.next();
-
-		System.out.println("PLS Enter password");
-		String pass = sa.next();
-
-		System.out.println("PLS Enter customer First Name");
-		String customerFirstName = sa.next();
-
-		System.out.println("PLS Enter customer Last Name");
-		String customerLastName = sa.next();
-		String CustomerFullName = customerFirstName + " " + customerLastName;
-
-		System.out.println("PLS Enter phoneNumber");
-		int phoneNumber = sa.nextInt();
-
-		System.out.println("PLS Enter invoice Date");
-		String invoiceDate = sa.next();
-
-		System.out.println("PLS Enter Item name you want");
-		String name = sa.next();
-		System.out.println("Pls enter how many you give the counter?");
-		int counter = sa.nextInt();
+		user = sa.next();
+		
+	}catch (InputMismatchException e) {
+			System.err.println(e);
+		}
+	String pass="";
+try {
+	System.out.println("PLS Enter password");
+	pass = sa.next();
+	
+}catch (InputMismatchException e) {
+	System.err.println(e);
+}
+String customerFirstName=""	;
+try {
+	System.out.println("PLS Enter customer First Name");
+	customerFirstName = sa.next();
+	
+}catch (InputMismatchException e) {
+	System.err.println(e);
+}
+String customerLastName=""	;
+String CustomerFullName="";
+try {
+	System.out.println("PLS Enter customer Last Name");
+	customerLastName = sa.next();
+	CustomerFullName = customerFirstName + " " + customerLastName;
+}catch (InputMismatchException e) {
+	System.err.println(e);
+}
+int phoneNumber=0;
+try {
+	System.out.println("PLS Enter phoneNumber");
+	phoneNumber= sa.nextInt();
+	
+}catch (InputMismatchException e) {
+	System.err.println(e);
+}
+String invoiceDate="";	
+try {
+	System.out.println("PLS Enter invoice Date");
+	invoiceDate = sa.next();
+	
+}catch (InputMismatchException e) {
+	System.err.println(e);
+}
+String name="";
+try {
+	System.out.println("PLS Enter Item name you want");
+	name = sa.next();
+}catch (InputMismatchException e) {
+	System.err.println(e);
+}
+int counter=0;
+		try {
+			System.out.println("Pls enter how many you give the counter?");
+			counter = sa.nextInt();
+		}catch (InputMismatchException e) {
+			System.err.println(e);
+		}
+		
 
 		String sqlNumberOfItems = "select COUNT(*)as Picks from itemsTable where itemName ='" + name + "'";
 		String sqlTotalAmount = "select Price *(quantity) from itemsTable where itemName ='" + name + "'";
@@ -291,10 +338,15 @@ public class invoiceDetails {
 			DriverManager.registerDriver(driver);
 			con = DriverManager.getConnection(url, username, password);
 			Statement st = con.createStatement();
-
+			int userin=0;
 			Scanner sa = new Scanner(System.in);
-			System.out.println("Pls Enter the id you want to search it:");
-			int userin = sa.nextInt();
+			try {
+				System.out.println("Pls Enter the id you want to search it:");
+				userin = sa.nextInt();	
+			}catch (InputMismatchException e) {
+				System.err.println(e);
+			}
+			
 			String sql = "SELECT * FROM invoicetable INNER JOIN itemstable ON itemstable.id = invoicetable.ItemsInvoice_id WHERE invoicetable.id="
 					+ userin + "";
 			ResultSet result = st.executeQuery(sql);
